@@ -5,6 +5,7 @@ const { json, urlencoded } = require('express');
 const dotenv = require('dotenv');
 const { firstApi } = require('./src/routes/first');
 const { tMiddleware } = require('./src/middleware/test');
+const { ussdApi } = require('./src/routes/ussd');
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ async function main() {
 }
 
 app.get('/', [tMiddleware], firstApi);
+app.post('/ussd', ussdApi);
 
 const PORT = process.env.PORT || 8000;
 
