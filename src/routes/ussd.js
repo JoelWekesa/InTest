@@ -1,4 +1,5 @@
 const ussdApi = (req, res) => {
+	const { text } = req.body;
 	let response;
 	console.log(res.body);
 
