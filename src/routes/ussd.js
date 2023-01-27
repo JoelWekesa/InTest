@@ -4,7 +4,7 @@ const ussdApi = (req, res) => {
 	console.log(res.body);
 
 	if (text === '') {
-		response = 'CON Enter your name';
+		response = 'CON 0: Check status \n 1: Make claim';
 	}
 	if (text !== '') {
 		let arr = text.split('*');
