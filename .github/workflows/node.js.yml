@@ -1,0 +1,29 @@
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote connection
+    
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        script: |
+          sudo su
+          git config --global --add safe.directory /root/apps/InTest   
+          cd /root/apps/InTest
+          git pull
+          yarn
+          yarn run start
