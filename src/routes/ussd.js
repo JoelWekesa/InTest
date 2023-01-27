@@ -68,6 +68,8 @@ const ussdApi = (req, res) => {
 		response = `END You have successfully filled a natural calamity claim.
         One of our respondents will reach out for further details.
         `;
+
+		console.log('text', text);
 	}
 
 	// Print the response onto the page so that our SDK can read it
