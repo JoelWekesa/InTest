@@ -5,7 +5,8 @@ const ussdApi = (req, res) => {
 
 	if (text === '') {
 		response = 'CON Enter your name';
-	} else if (text.length === 1) {
+	}
+	if (text.length === 1) {
 		response = 'CON Enter your policy number';
 	}
 
