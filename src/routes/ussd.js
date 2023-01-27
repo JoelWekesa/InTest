@@ -5,11 +5,13 @@ const ussdApi = (req, res) => {
 
 	if (text === '') {
 		response = 'CON Enter your name';
+	} else if (text.length === 1) {
+		response = 'CON Enter your policy number';
 	}
 
 	setTimeout(() => {
 		res.send(response);
-	}, res.end);
+	}, 2000);
 };
 
 module.exports = {
