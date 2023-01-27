@@ -7,7 +7,13 @@ const ussdApi = (req, res) => {
 		response = 'CON Enter your name';
 	}
 	if (text !== '') {
-		response = 'CON Enter your policy number';
+		let arr = text.split('*');
+		if (arr.length === 1) {
+			response = 'CON Enter your policy number';
+		} else {
+			response =
+				'End Thank you for making your claim. A respondent will get back to you';
+		}
 	}
 
 	setTimeout(() => {
