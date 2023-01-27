@@ -26,4 +26,3 @@ jobs:
           cd /root/apps/InTest
           git pull
           yarn
-          yarn run start
