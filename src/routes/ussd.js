@@ -10,9 +10,8 @@ const ussdApi = (req, res) => {
 		let arr = text.split('*');
 		if (arr.length === 1) {
 			response = 'CON Enter your policy number';
-		} else {
-			response =
-				'End Thank you for making your claim. A respondent will get back to you';
+		} else if (arr.length === 2) {
+			response = 'END Process has been completed';
 		}
 	}
 
