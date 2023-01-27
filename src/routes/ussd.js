@@ -8,28 +8,66 @@ const ussdApi = (req, res) => {
 
 	if (text === '') {
 		// This is the first request. Note how we start the response with CON
-		response = `CON What would you like to check
-        1. My account
-        2. My phone number`;
+		response = `CON Welcome to Incourage. Please select a service
+        1. View cover status
+        2. Make a claim`;
 	} else if (text === '1') {
 		// Business logic for first level response
-		response = `CON Choose account information you want to view
-        1. Account number
-        2. Account balance`;
+		response = `CON Select Identifier
+        1. National ID
+        2. Policy Number`;
 	} else if (text === '2') {
 		// Business logic for first level response
 		// This is a terminal request. Note how we start the response with END
-		response = `END Your phone number is ${phoneNumber}`;
+		response = `CON Select Identifier
+        1. National ID
+        2. Policy Number`;
 	} else if (text === '1*1') {
 		// This is a second level response where the user selected 1 in the first instance
-		const accountNumber = 'ACC100101';
+		const nationalID = '12345678';
+		const policyNo = 'ACB1234KLM';
 		// This is a terminal request. Note how we start the response with END
-		response = `END Your account number is ${accountNumber}`;
+		response = `END Your cover of policy ${policyNo} associated with ID ${nationalID} is active`;
 	} else if (text === '1*2') {
 		// This is a second level response where the user selected 1 in the first instance
-		const balance = 'KES 10,000';
+		const nationalID = '12345678';
+		const policyNo = 'ACB1234KLM';
 		// This is a terminal request. Note how we start the response with END
-		response = `END Your balance is ${balance}`;
+		response = `END Your cover of policy ${policyNo} associated with ID ${nationalID} is active`;
+	} else if (text === '2*1') {
+		response = `CON Select Type of Claim
+        1. Accident Claim
+        2. Natural Calamity Claim
+        3. Riot Claim`;
+	} else if (text === '2*1*1') {
+		response = `END You have successfully filled an accident claim.
+        One of our respondents will reach out for further details.
+        `;
+	} else if (text === '2*1*2') {
+		response = `END You have successfully filled a natural calamity claim.
+        One of our respondents will reach out for further details.
+        `;
+	} else if (text === '2*1*3') {
+		response = `END You have successfully filled a natural calamity claim.
+        One of our respondents will reach out for further details.
+        `;
+	} else if (text === '2*2') {
+		response = `CON Select Type of Claim
+        1. Accident Claim
+        2. Natural Calamity Claim
+        3. Riot Claim`;
+	} else if (text === '2*2*1') {
+		response = `END You have successfully filled an accident claim.
+        One of our respondents will reach out for further details.
+        `;
+	} else if (text === '2*2*2') {
+		response = `END You have successfully filled a natural calamity claim.
+        One of our respondents will reach out for further details.
+        `;
+	} else if (text === '2*2*3') {
+		response = `END You have successfully filled a natural calamity claim.
+        One of our respondents will reach out for further details.
+        `;
 	}
 
 	// Print the response onto the page so that our SDK can read it
