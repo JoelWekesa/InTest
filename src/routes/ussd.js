@@ -41,7 +41,7 @@ const ussdApi = async (req, res) => {
 					response = `END ${claimResult}`;
 				}
 			}
-		} else if ((arr.length > 0 && arr[0] !== '1') || arr[0] !== '2') {
+		} else if (arr.length > 0 && arr[0] !== '1' && arr[0] !== '2') {
 			arr = [];
 		}
 	}
