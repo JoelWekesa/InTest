@@ -18,7 +18,10 @@ const ussdApi = (req, res) => {
 		response = `CON Enter Policy Number
         `;
 	} else {
-		response = `END ${text}`;
+		let arr = text.split('*');
+		if (arr[0] === '1') {
+			response = `END Your policy number is ${arr[1]}`;
+		}
 	}
 	// Print the response onto the page so that our SDK can read it
 	res.set('Content-Type: text/plain');
