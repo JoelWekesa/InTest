@@ -1,9 +1,9 @@
 const { Cover } = require('../models/cover');
 
-const firstApi = async (req, res) => {
+const coverApi = async (req, res) => {
 	const cover = await Cover.create({
-        cover: '1234567890'
-    })
+		cover: Math.random().toString(32).slice(2),
+	})
 		.then((data) => {
 			return res.status(201).json(data);
 		})
@@ -16,5 +16,5 @@ const firstApi = async (req, res) => {
 };
 
 module.exports = {
-	firstApi,
+	coverApi,
 };

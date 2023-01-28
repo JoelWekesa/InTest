@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { json, urlencoded } = require('express');
 const dotenv = require('dotenv');
-const { firstApi } = require('./src/routes/first');
+const { coverApi } = require('./src/routes/cover');
 const { ussdApi } = require('./src/routes/ussd');
 const { connectDB } = require('./src/db');
 const { bot } = require('./src/routes/telegraph');
@@ -22,7 +22,7 @@ bot.launch();
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
-app.post('/', firstApi);
+app.post('/', coverApi);
 app.post('/ussd', ussdApi);
 
 const PORT = process.env.PORT || 8000;
