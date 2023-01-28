@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const { firstApi } = require('./src/routes/first');
 const { ussdApi } = require('./src/routes/ussd');
 const { connectDB } = require('./src/db');
+const { bot } = require('./src/routes/telegraph');
 
 dotenv.config();
 
@@ -15,6 +16,11 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 
 connectDB();
+
+bot.launch();
+
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 app.post('/', firstApi);
 app.post('/ussd', ussdApi);
