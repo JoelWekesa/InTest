@@ -19,6 +19,7 @@ const ussdApi = async (req, res) => {
 	} else if (text === '1' || text === '2') {
 		// Business logic for first level response
 		arr = text.split('*');
+		console.log('arr', arr);
 		response = `CON Enter Policy Number
         `;
 	} else {
