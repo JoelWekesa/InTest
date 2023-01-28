@@ -43,7 +43,7 @@ const ussdApi = async (req, res) => {
 				}
 			}
 		} else if (!valid.includes(arr[0])) {
-			text = '';
+			response = '';
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
