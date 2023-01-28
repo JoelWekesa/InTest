@@ -16,11 +16,10 @@ const ussdApi = async (req, res) => {
         2. Make a claim`;
 	} else if (text === '1' || text === '2') {
 		// Business logic for first level response
-		
+		arr = text.split('*');
 		response = `CON Enter Policy Number
         `;
 	} else {
-		arr = text.split('*');
 		if (arr[0] === '1') {
 			const cover = arr[1];
 			const result = await status(cover);
