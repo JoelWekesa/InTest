@@ -25,6 +25,12 @@ const ussdApi = async (req, res) => {
 			const result = await status(cover);
 
 			response = `END ${result}`;
+		} else if (arr[0] === '2') {
+			const cover = arr[1];
+			const result = await status(cover);
+			if (result === 'Invalid policy number') {
+				response = `END ${result}`;
+			}
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
