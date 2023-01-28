@@ -3,11 +3,13 @@ const { status } = require('../helpers/status');
 
 const ussdApi = async (req, res) => {
 	// Read variables sent via POST from our SDK
-	const { sessionId, serviceCode, phoneNumber, text } = req.body;
+	let { sessionId, serviceCode, phoneNumber, text } = req.body;
+	let start = false;
 
 	let response = '';
 
-	if (text === '') {
+	if (text === '' && start === false) {
+		start = true;
 		// This is the first request. Note how we start the response with CON
 		response = `CON Welcome to Incourage. Please select a service
         1. View cover status
@@ -16,6 +18,12 @@ const ussdApi = async (req, res) => {
 		// Business logic for first level response
 		response = `CON Enter Policy Number
         `;
+	} else if (text !== '1' && text !== '2') {
+		text = '';
+		response = `Invalid selection. 
+        Please select a service from the options below
+        1. View cover status
+        2. Make a claim`;
 	} else {
 		let arr = text.split('*');
 		if (arr[0] === '1') {
