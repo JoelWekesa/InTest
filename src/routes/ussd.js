@@ -30,6 +30,22 @@ const ussdApi = async (req, res) => {
 			const result = await status(cover);
 			if (result === 'Invalid policy number') {
 				response = `END ${result}`;
+			} else if (result !== 'Invalid policy number') {
+				response = `CON Enter claim amount`;
+				let arr = text.split('*');
+
+				if (arr.length === 3) {
+					const cover = arr[1];
+					const amnt = arr[2];
+
+					try {
+						const amount = +amnt;
+						const claimResult = await claim(cover, amount);
+						response = `END ${claimResult}`;
+					} catch (error) {
+						response = `END Invalid amount`;
+					}
+				}
 			}
 		}
 	}
