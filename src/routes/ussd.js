@@ -1,3 +1,5 @@
+const { Cover } = require('../models/cover');
+
 const firstResponse = '0: Check status \n 1: Make claim';
 
 const ussdApi = (req, res) => {
@@ -11,17 +13,29 @@ const ussdApi = (req, res) => {
 		response = `CON Welcome to Incourage. Please select a service
         1. View cover status
         2. Make a claim`;
-	} else if (text === '1') {
+	} else if (text === '1' || text === '2') {
 		// Business logic for first level response
-		response = `CON Select Identifier
-        1. National ID
-        2. Policy Number`;
-	} else if (text === '2') {
+		response = `CON Enter Policy Number
+        `;
+	} else if (text.startsWith('1*')) {
 		// Business logic for first level response
 		// This is a terminal request. Note how we start the response with END
-		response = `CON Select Identifier
-        1. National ID
-        2. Policy Number`;
+		const arr = text.split('*');
+
+		const cover = arr[1];
+
+		async () => {
+			const status = await Cover.findOne({
+				cover,
+			}).then((data) => {
+				if (!data) {
+					response = `END Could not find a cover with policy number ${cover}`;
+				}
+				response = `END Your cover is ${data.status}`;
+			});
+
+			return status;
+		};
 	} else if (text === '1*1') {
 		// This is a second level response where the user selected 1 in the first instance
 		const nationalID = '12345678';

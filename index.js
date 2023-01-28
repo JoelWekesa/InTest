@@ -1,11 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const { json, urlencoded } = require('express');
 const dotenv = require('dotenv');
 const { firstApi } = require('./src/routes/first');
-const { tMiddleware } = require('./src/middleware/test');
 const { ussdApi } = require('./src/routes/ussd');
+const { connectDB } = require('./src/db');
 
 dotenv.config();
 
@@ -15,17 +14,9 @@ app.use(cors());
 app.use(json());
 app.use(urlencoded({ extended: false }));
 
-const mongoDB = process.env.MONGO_URI;
+connectDB();
 
-main().catch((err) => {
-	throw new Error(err);
-});
-async function main() {
-	await mongoose.connect(mongoDB);
-	console.log('Database connected');
-}
-
-app.get('/', [tMiddleware], firstApi);
+app.post('/', firstApi);
 app.post('/ussd', ussdApi);
 
 const PORT = process.env.PORT || 8000;
