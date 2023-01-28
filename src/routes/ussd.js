@@ -41,8 +41,6 @@ const ussdApi = async (req, res) => {
 					response = `END ${claimResult}`;
 				}
 			}
-		} else if (arr.length > 0 && arr[0] !== '1' && arr[0] !== '2') {
-			arr = [];
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
