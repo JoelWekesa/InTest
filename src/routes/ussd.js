@@ -14,6 +14,8 @@ const ussdApi = async (req, res) => {
 		response = `CON Welcome to Incourage. Please select a service
         1. View cover status
         2. Make a claim`;
+
+		console.log('text', text);
 	} else if (text === '1' || text === '2') {
 		// Business logic for first level response
 		arr = text.split('*');
@@ -43,7 +45,7 @@ const ussdApi = async (req, res) => {
 				}
 			}
 		} else if (!valid.includes(arr[0])) {
-			response = '';
+			response = `END Invalid selection`;
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
