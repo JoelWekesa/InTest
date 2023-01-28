@@ -23,9 +23,12 @@ const ussdApi = (req, res) => {
 		if (arr[0] === '1') {
 			const cover = arr[1];
 
-			const n = status(cover);
+			const message = async () => {
+				const result = await status(cover);
+				response = `END ${result}`;
+			};
 
-			response = `END Your policy is ${n}`;
+			message();
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
