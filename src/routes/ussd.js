@@ -20,6 +20,7 @@ const ussdApi = async (req, res) => {
 		response = `CON Enter Policy Number
         `;
 	} else {
+		arr = text.split('*');
 		if (arr[0] === '1') {
 			const cover = arr[1];
 			const result = await status(cover);
