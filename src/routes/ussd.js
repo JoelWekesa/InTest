@@ -9,7 +9,7 @@ const ussdApi = async (req, res) => {
 
 	let response = '';
 
-	if (arr.length === 0) {
+	if (text === '') {
 		// This is the first request. Note how we start the response with CON
 		response = `CON Welcome to Incourage. Please select a service
         1. View cover status
