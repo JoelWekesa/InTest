@@ -18,14 +18,8 @@ const ussdApi = async (req, res) => {
 		// Business logic for first level response
 		response = `CON Enter Policy Number
         `;
-	} else if (text !== '1' && text !== '2') {
-		response = `Invalid selection. 
-        Please select a service from the options below
-        1. View cover status
-        2. Make a claim`;
-
-		const arr = text.split('*');
-		text = arr[1];
+	} else if (text !== '' && text !== '1' && text !== '2') {
+		text = '';
 	} else {
 		let arr = text.split('*');
 		if (arr[0] === '1') {
