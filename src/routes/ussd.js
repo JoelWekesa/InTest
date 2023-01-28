@@ -34,15 +34,13 @@ const ussdApi = async (req, res) => {
 
 				if (arr.length === 3) {
 					const cover = arr[1];
-					const amnt = arr[2];
+					const amount = arr[2];
 
-					try {
-						const amount = +amnt;
-						const claimResult = await claim(cover, amount);
-						response = `END ${claimResult}`;
-					} catch (error) {
+					if (typeof parseInt(amount) !== 'number') {
 						response = `END Invalid amount`;
 					}
+					const claimResult = await claim(cover, amount);
+					response = `END ${claimResult}`;
 				}
 			}
 		}
