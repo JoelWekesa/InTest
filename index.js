@@ -6,6 +6,7 @@ const { firstApi } = require('./src/routes/first');
 const { ussdApi } = require('./src/routes/ussd');
 const { connectDB } = require('./src/db');
 const { status } = require('./src/helpers/status');
+const { claim } = require('./src/helpers/claim');
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ app.post('/ussd', ussdApi);
 const PORT = process.env.PORT || 8000;
 
 const p = async () => {
-	const x = await status('12345');
+	const x = await claim('1234567890', '50');
 
 	console.log('x', x);
 };

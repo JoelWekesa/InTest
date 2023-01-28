@@ -4,19 +4,23 @@ const { Cover } = require('../models/cover');
 const claim = async (cover, amount) => {
 	const n = await Cover.findOne({ cover })
 		.then(async (data) => {
-			if (!data) {
-				return 'Invalid policy number';
+			if (parseInt(amount) > 0) {
+				if (!data) {
+					return 'Invalid policy number';
+				}
+
+				return await Claim.create({
+					cover,
+					amount: parseInt(amount),
+				})
+					.then(
+						() =>
+							`New claim for cover of policy number ${cover} for KSHs ${amount} has been made`
+					)
+					.catch((err) => err.message);
 			}
 
-			return await Claim.create({
-				cover,
-				amount: +amount,
-			})
-				.then(
-					() =>
-						`New claim for cover of policy number ${cover} for KSHs ${amount} has been made`
-				)
-				.catch((err) => err.message);
+			return 'Invalid amount';
 		})
 		.catch((err) => {
 			return 'An error occurred';
