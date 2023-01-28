@@ -4,7 +4,7 @@ const { status } = require('../helpers/status');
 const ussdApi = async (req, res) => {
 	// Read variables sent via POST from our SDK
 	let { sessionId, serviceCode, phoneNumber, text } = req.body;
-	let start = false;
+	const valid = ['1', '2'];
 	let arr = [];
 
 	let response = '';
@@ -42,7 +42,7 @@ const ussdApi = async (req, res) => {
 					response = `END ${claimResult}`;
 				}
 			}
-		} else if (arr[0] !== 1 || arr[1] !== 2) {
+		} else if (!valid.includes(arr[0])) {
 			response = `END Invalid selection`;
 		}
 	}
