@@ -39,7 +39,6 @@ const ussdApi = async (req, res) => {
 					const amnt = arr[2];
 
 					try {
-						const amount = +amnt;
 						const claimResult = await claim(cover, amount);
 						response = `END ${claimResult}`;
 					} catch (error) {
