@@ -23,14 +23,6 @@ app.post('/ussd', ussdApi);
 
 const PORT = process.env.PORT || 8000;
 
-const p = async () => {
-	const x = await claim('1234567890', '50');
-
-	console.log('x', x);
-};
-
-p();
-
 app.listen(PORT, (err) => {
 	if (err) throw err;
 	console.log('Server running');
