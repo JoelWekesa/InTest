@@ -14,12 +14,9 @@ const ussdApi = async (req, res) => {
 		response = `CON Welcome to Incourage. Please select a service
         1. View cover status
         2. Make a claim`;
-
-		console.log('text', text);
 	} else if (text === '1' || text === '2') {
 		// Business logic for first level response
 		arr = text.split('*');
-		console.log('arr', arr);
 		response = `CON Enter Policy Number
         `;
 	} else {
