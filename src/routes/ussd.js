@@ -8,7 +8,7 @@ const ussdApi = async (req, res) => {
 
 	let response = '';
 
-	if (text === '' && start === false) {
+	if (text === '') {
 		start = true;
 		// This is the first request. Note how we start the response with CON
 		response = `CON Welcome to Incourage. Please select a service
@@ -19,11 +19,13 @@ const ussdApi = async (req, res) => {
 		response = `CON Enter Policy Number
         `;
 	} else if (text !== '1' && text !== '2') {
-		text = '';
 		response = `Invalid selection. 
         Please select a service from the options below
         1. View cover status
         2. Make a claim`;
+
+		const arr = text.split('*');
+		text = arr[1];
 	} else {
 		let arr = text.split('*');
 		if (arr[0] === '1') {
