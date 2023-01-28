@@ -1,3 +1,4 @@
+const { status } = require('../helpers/status');
 const { Cover } = require('../models/cover');
 
 const firstResponse = '0: Check status \n 1: Make claim';
@@ -22,23 +23,9 @@ const ussdApi = (req, res) => {
 		if (arr[0] === '1') {
 			const cover = arr[1];
 
-			const status = async () => {
-				const policy = await Cover.findOne({ cover })
-					.then((data) => {
-						if (!data) {
-							response = `END Could not find cover for policy number ${cover}`;
-						} else {
-							response = `END Your cover of policy number ${cover} is ${data.status}`;
-						}
-					})
-					.catch((err) => {
-						response = `END ${err.message}`;
-					});
+			const n = status(cover);
 
-				return policy;
-			};
-
-			status();
+			response = `END Your policy is ${n}`;
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
