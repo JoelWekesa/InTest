@@ -1,7 +1,5 @@
+const { claim } = require('../helpers/claim');
 const { status } = require('../helpers/status');
-const { Cover } = require('../models/cover');
-
-const firstResponse = '0: Check status \n 1: Make claim';
 
 const ussdApi = async (req, res) => {
 	// Read variables sent via POST from our SDK
@@ -39,6 +37,7 @@ const ussdApi = async (req, res) => {
 					const amnt = arr[2];
 
 					try {
+						const amount = +amnt;
 						const claimResult = await claim(cover, amount);
 						response = `END ${claimResult}`;
 					} catch (error) {
