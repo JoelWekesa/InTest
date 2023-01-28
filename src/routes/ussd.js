@@ -20,7 +20,25 @@ const ussdApi = (req, res) => {
 	} else {
 		let arr = text.split('*');
 		if (arr[0] === '1') {
-			response = `END Your policy number is ${arr[1]}`;
+			const cover = arr[1];
+
+			const status = async () => {
+				const policy = await Cover.findOne({ cover })
+					.then((data) => {
+						if (!data) {
+							response = `END Could not find cover for policy number ${cover}`;
+						} else {
+							response = `END Your cover of policy number ${cover} is ${data.status}`;
+						}
+					})
+					.catch((err) => {
+						response = `END ${err.message}`;
+					});
+
+				return policy;
+			};
+
+			status();
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
