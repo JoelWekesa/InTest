@@ -3,7 +3,7 @@ const { Cover } = require('../models/cover');
 
 const firstResponse = '0: Check status \n 1: Make claim';
 
-const ussdApi = (req, res) => {
+const ussdApi = async (req, res) => {
 	// Read variables sent via POST from our SDK
 	const { sessionId, serviceCode, phoneNumber, text } = req.body;
 
@@ -22,13 +22,9 @@ const ussdApi = (req, res) => {
 		let arr = text.split('*');
 		if (arr[0] === '1') {
 			const cover = arr[1];
+			const result = await status(cover);
 
-			const message = async () => {
-				const result = await status(cover);
-				response = `END ${result}`;
-			};
-
-			message();
+			response = `END ${result}`;
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
