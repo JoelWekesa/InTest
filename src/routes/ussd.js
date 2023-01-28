@@ -43,7 +43,7 @@ const ussdApi = async (req, res) => {
 				}
 			}
 		} else if (!valid.includes(arr[0])) {
-			response = `END Invalid selection`;
+			text = '';
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
