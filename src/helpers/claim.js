@@ -13,7 +13,8 @@ const claim = async (cover, amount) => {
 				amount: +amount,
 			})
 				.then(
-					() => `New claim for cover of policy number ${cover} has been made`
+					() =>
+						`New claim for cover of policy number ${cover} for KSHs ${amount} has been made`
 				)
 				.catch((err) => err.message);
 		})

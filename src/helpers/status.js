@@ -7,7 +7,7 @@ const status = async (cover) => {
 				return 'Invalid policy number';
 			}
 
-			return `Your policy number ${cover} is ${data.status}`;
+			return `Your cover of policy number ${cover} is ${data.status}`;
 		})
 		.catch((err) => {
 			return 'An error occurred';
