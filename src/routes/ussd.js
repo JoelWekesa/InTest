@@ -42,6 +42,8 @@ const ussdApi = async (req, res) => {
 					response = `END ${claimResult}`;
 				}
 			}
+		} else if (arr[0] !== 1 || arr[1] !== 2) {
+			response = `END Invalid selection`;
 		}
 	}
 	// Print the response onto the page so that our SDK can read it
