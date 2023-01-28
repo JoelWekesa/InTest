@@ -36,14 +36,14 @@ bot.command('claim', async (ctx) => {
 				'\n' +
 				helpMessage
 		);
+	} else {
+		const cover = text[1];
+		const amount = text[2];
+
+		const result = await claim({ cover, amount });
+
+		ctx.reply(result);
 	}
-
-	const cover = text[1];
-	const amount = text[2];
-
-	const result = await claim({ cover, amount });
-
-	ctx.reply(result);
 });
 
 bot.command('status', async (ctx) => {
@@ -57,13 +57,13 @@ bot.command('status', async (ctx) => {
 				'\n' +
 				helpMessage
 		);
+	} else {
+		const cover = text[1];
+
+		const result = await status({ cover });
+
+		ctx.reply(result);
 	}
-
-	const cover = text[1];
-
-	const result = await status({ cover });
-
-	ctx.reply(result);
 });
 
 bot.hears('Hi', (ctx) => {
