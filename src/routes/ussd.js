@@ -17,7 +17,7 @@ const ussdApi = (req, res) => {
 		// Business logic for first level response
 		response = `CON Enter Policy Number
         `;
-	} else if (text.startsWith('1*')) {
+	} else if (('' + text).startsWith('1*')) {
 		// Business logic for first level response
 		// This is a terminal request. Note how we start the response with END
 		const arr = text.split('*');
