@@ -1,7 +1,7 @@
 const { Claim } = require('../models/claims');
 const { Cover } = require('../models/cover');
 
-const claim = async (cover, amount) => {
+const claim = async ({ phoneNumber, cover, amount }) => {
 	const n = await Cover.findOne({ cover })
 		.then(async (data) => {
 			if (parseInt(amount) > 0) {

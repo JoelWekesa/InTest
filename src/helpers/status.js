@@ -1,6 +1,6 @@
 const { Cover } = require('../models/cover');
 
-const status = async (cover) => {
+const status = async ({ phoneNumber, cover }) => {
 	const n = await Cover.findOne({ cover })
 		.then((data) => {
 			if (!data) {

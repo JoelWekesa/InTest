@@ -23,12 +23,12 @@ const ussdApi = async (req, res) => {
 		arr = text.split('*');
 		if (arr[0] === '1') {
 			const cover = arr[1];
-			const result = await status(cover);
+			const result = await status({ cover });
 
 			response = `END ${result}`;
 		} else if (arr[0] === '2') {
 			const cover = arr[1];
-			const result = await status(cover);
+			const result = await status({ cover });
 			if (result === 'Invalid policy number') {
 				response = `END ${result}`;
 			} else if (result !== 'Invalid policy number') {
@@ -38,7 +38,7 @@ const ussdApi = async (req, res) => {
 				if (arr.length === 3) {
 					const cover = arr[1];
 					const amount = arr[2];
-					const claimResult = await claim(cover, amount);
+					const claimResult = await claim({ cover, amount });
 					response = `END ${claimResult}`;
 				}
 			}
