@@ -12,7 +12,7 @@ const status = async (cover) => {
 		.catch((err) => {
 			return 'An error occurred';
 		});
-	return cover;
+	return n;
 };
 
 module.exports = {
