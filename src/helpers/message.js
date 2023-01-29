@@ -11,7 +11,7 @@ const sendMessage = ({ phoneNumber, message }) => {
 	const options = {
 		to: [phoneNumber],
 		message,
-		from: 'Incourage',
+		from: '21635',
 	};
 
 	sms
