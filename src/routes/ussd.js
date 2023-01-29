@@ -1,5 +1,8 @@
 const { claim } = require('../helpers/claim');
 const { status } = require('../helpers/status');
+const { EventEmitter } = require('node:events');
+
+const eventEmitter = new EventEmitter();
 
 const ussdApi = async (req, res) => {
 	// Read variables sent via POST from our SDK
@@ -24,6 +27,13 @@ const ussdApi = async (req, res) => {
 		if (arr[0] === '1') {
 			const cover = arr[1];
 			const result = await status({ cover });
+
+			const compose = {
+				phoneNumber,
+				result,
+			};
+
+			eventEmitter.emit('view.status', compose);
 
 			response = `END ${result}`;
 		} else if (arr[0] === '2') {
@@ -51,6 +61,12 @@ const ussdApi = async (req, res) => {
 	res.send(response);
 	// DONE!!!
 };
+
+eventEmitter.on('view.status', (data) => {
+	const { phoneNumber, result } = data;
+	console.log(phoneNumber);
+	console.log(result);
+});
 
 module.exports = {
 	ussdApi,
