@@ -50,6 +50,13 @@ const ussdApi = async (req, res) => {
 					const cover = arr[1];
 					const amount = arr[2];
 					const claimResult = await claim({ cover, amount });
+					const compose = {
+						phoneNumber,
+						claimResult,
+					};
+
+					eventEmitter.emit('make.claim', compose);
+
 					response = `END ${claimResult}`;
 				}
 			}
@@ -65,7 +72,22 @@ const ussdApi = async (req, res) => {
 
 eventEmitter.on('view.status', (data) => {
 	const { phoneNumber, result: message } = data;
-	sendMessage({ phoneNumber, message });
+
+	if (message.includes('policy number')) {
+		sendMessage({ phoneNumber, message });
+	} else {
+		return;
+	}
+});
+
+eventEmitter.on('make.claim', (data) => {
+	const { phoneNumber, claimResult: message } = data;
+
+	if (message.includes('policy number')) {
+		sendMessage({ phoneNumber, message });
+	} else {
+		return;
+	}
 });
 
 module.exports = {
