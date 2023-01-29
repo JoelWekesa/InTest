@@ -73,7 +73,7 @@ const ussdApi = async (req, res) => {
 eventEmitter.on('view.status', (data) => {
 	const { phoneNumber, result: message } = data;
 
-	if (message.includes('policy number')) {
+	if (message.includes('Your cover of policy number')) {
 		sendMessage({ phoneNumber, message });
 	} else {
 		return;
@@ -83,7 +83,7 @@ eventEmitter.on('view.status', (data) => {
 eventEmitter.on('make.claim', (data) => {
 	const { phoneNumber, claimResult: message } = data;
 
-	if (message.includes('policy number')) {
+	if (message.includes('New claim for cover of policy number')) {
 		sendMessage({ phoneNumber, message });
 	} else {
 		return;
