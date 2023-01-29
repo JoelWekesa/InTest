@@ -1,6 +1,7 @@
 const { claim } = require('../helpers/claim');
 const { status } = require('../helpers/status');
 const { EventEmitter } = require('node:events');
+const { sendMessage } = require('../helpers/message');
 
 const eventEmitter = new EventEmitter();
 
@@ -63,9 +64,8 @@ const ussdApi = async (req, res) => {
 };
 
 eventEmitter.on('view.status', (data) => {
-	const { phoneNumber, result } = data;
-	console.log(phoneNumber);
-	console.log(result);
+	const { phoneNumber, result: message } = data;
+	sendMessage({ phoneNumber, message });
 });
 
 module.exports = {
