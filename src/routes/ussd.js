@@ -14,16 +14,17 @@ const ussdApi = async (req, res) => {
 	let response = '';
 
 	if (text === '') {
-		// This is the first request. Note how we start the response with CON
+		// First interactive request
 		response = `CON Welcome to Incourage. Please select a service
         1. View cover status
         2. Make a claim`;
 	} else if (text === '1' || text === '2') {
-		// Business logic for first level response
+		// First business logic. Ask the user to add their policy number
 		arr = text.split('*');
 		response = `CON Enter Policy Number
         `;
 	} else {
+		// Business logic if user wants to view their status
 		arr = text.split('*');
 		if (arr[0] === '1') {
 			const cover = arr[1];
@@ -34,10 +35,12 @@ const ussdApi = async (req, res) => {
 				result,
 			};
 
+			// Emit an event to the messaging function with a status payload
 			eventEmitter.emit('view.status', compose);
 
 			response = `END ${result}`;
 		} else if (arr[0] === '2') {
+			// Business logic when a user selects option 2
 			const cover = arr[1];
 			const result = await status({ cover });
 			if (result === 'Invalid policy number') {
@@ -55,21 +58,22 @@ const ussdApi = async (req, res) => {
 						claimResult,
 					};
 
+					// Emit an event to the messaging function with a claim payload
 					eventEmitter.emit('make.claim', compose);
 
 					response = `END ${claimResult}`;
 				}
 			}
 		} else if (!valid.includes(arr[0])) {
+			// Business logic if a user selects neither 1 nor 2
 			response = `END Invalid selection`;
 		}
 	}
-	// Print the response onto the page so that our SDK can read it
 	res.set('Content-Type: text/plain');
 	res.send(response);
-	// DONE!!!
 };
 
+//Listen to messages from event emitters
 eventEmitter.on('view.status', (data) => {
 	const { phoneNumber, result: message } = data;
 
