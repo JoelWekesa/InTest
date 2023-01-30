@@ -21,7 +21,7 @@ const helpMessage = `Welcome to Incourage
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
-bot.start((ctx) => ctx.reply('Welcome to incourage'));
+bot.start((ctx) => ctx.reply(helpMessage));
 
 bot.help((ctx) => ctx.reply(helpMessage));
 
